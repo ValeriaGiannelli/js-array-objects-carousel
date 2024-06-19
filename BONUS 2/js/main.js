@@ -86,6 +86,37 @@ thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
 let clickDown = document.querySelector(".arrow_down");
 
 // aggiungo l'evento di click
+
+setInterval(
+    function(){
+
+        // far funzionare le frecce fino a quando ci sono gli elementi in pagina altrimenti si ferma
+        if(indexCardItem < cardItem.length - 1){ //metto il -1 perché altrimenti arrivato all'index 4 mi metterebbe la classe attiva sul 5 che non esiste
+            // tolgo la classe all'elemento che la ha in questo momento
+            cardItem[indexCardItem].classList.remove("active");
+            thumbnailsItem[indexCardItem].classList.remove("active_thumbnails");            
+
+             // aumento il valore dell'indice
+            indexCardItem++;
+
+            // metto la classe all'elemento corrispondente
+            cardItem[indexCardItem].classList.add("active"); 
+            thumbnailsItem[indexCardItem].classList.add("active_thumbnails"); 
+        
+        } else { //ciclo infinito del carosello 
+            // togli l'active dall'ultima card
+            cardItem[indexCardItem].classList.remove("active");
+            thumbnailsItem[indexCardItem].classList.remove("active_thumbnails"); 
+            // risetta l'indice della card a 0
+            indexCardItem = 0;
+            // metti attiva la card con l'indice 0
+            cardItem[indexCardItem].classList.add("active"); 
+            thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
+        }
+    }
+    , 3000);
+
+
 clickDown.addEventListener("click", 
     function(){
 
