@@ -90,6 +90,7 @@ let clickDown = document.querySelector(".arrow_down");
 // al click di start deve partire il set interval al click di stop deve fermarsi
 const startButton = document.querySelector(".start");
 const stopButton = document.querySelector(".stop");
+const reverseButton = document.querySelector(".reverse");
 
 let startCicleImg;
 
@@ -128,15 +129,53 @@ startButton.addEventListener("click",
 
 );
 
+let startCicleReverse;
+// tasto che fa partire la visualizzazione all'incontrario
+reverseButton.addEventListener("click",
+    function(){
+        clearInterval(startCicleImg);
+        startCicleReverse = setInterval(
+            function(){
+        
+                // far funzionare le frecce fino a quando ci sono gli elementi in pagina altrimenti si ferma
+                if(indexCardItem > 0){ 
+                    // toglie la classe all'elemento corrispondente
+                    cardItem[indexCardItem].classList.remove("active"); 
+                    thumbnailsItem[indexCardItem].classList.remove("active_thumbnails"); 
 
-// al click di stop deve fermarsi
+                    // diminuisce l'indice di uno
+                    indexCardItem--;
+
+                    // aggiunge la classe all'elemento precedente
+                    cardItem[indexCardItem].classList.add("active");
+                    thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
+
+                } else { //ciclo infinito del carosello 
+                    // togli l'active dall'ultima card
+                    cardItem[indexCardItem].classList.remove("active");
+                    thumbnailsItem[indexCardItem].classList.remove("active_thumbnails"); 
+                    // imposta l'indice della card all'ultima (ovvero la lungezza dell'array -1)
+                    indexCardItem = cardItem.length - 1;
+                    // metti attiva la card con l'indice descritto sopra
+                    cardItem[indexCardItem].classList.add("active"); 
+                    thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
+                }
+            }
+            , 3000)
+        }
+
+)
+
+// al click di stop deve fermarsi sia che sia versione normale, sia quella reverse
 stopButton.addEventListener("click", 
     function(){
         clearInterval(startCicleImg);
+        clearInterval(startCicleReverse);
     }
 )
 
 
+/* Lascio le freccie coi click*/
 clickDown.addEventListener("click", 
     function(){
 

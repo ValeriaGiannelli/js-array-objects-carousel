@@ -98,15 +98,13 @@
 .arrow_up{
     position: absolute;
     top: 10px;
-    left: 50%;
-    transform: translate(-50%);
+    left: 90%;
 }
 
 .arrow_down{
     position: absolute;
     bottom: 10px;
-    left: 50%;
-    transform: translate(-50%);
+    left: 90%;
 }
 
 
