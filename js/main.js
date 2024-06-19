@@ -54,101 +54,78 @@ images.forEach((element) => {
     containerCard.innerHTML += card;
 });
 
+// ho creato i miei div e ora devo mettere l'active al primo div che poi al click passerà al successivo e così via
 
-// prendo i singoli elementi del mio array -> ciclo FOR
-// for(i = 0; i< images.length; i++){
-//     console.log(images[i]);
+// visto che sono tanti e non posso farlo manualmente creerò anche qua un array -> getElemnts!
 
-//     // per ogni "i" questo ciclo mi deve creare un div con le immagini
-//     let card = `<div class="item">
-//                     <img src=${imagineArray[i]} alt="">
-//                  </div>`;
+const cardItem = document.getElementsByClassName("item");
+console.log(cardItem);
 
-//     // dove metto questo div? Nel mio contenitore che è il [div class="col"] quindi aggiungo a riga 18 il richiamo del div
+// non potendo cambiare i numeri a mano creo una variabili per andare ad indicare l'indice 
+let indexCardItem = 0; //lo setto a 0 come valore iniziale
 
-//     // inserisco il div nel contenitore
-//     containerCard.innerHTML += card;
-//     // vedo che mi si creano sotto le freccie, quindi faccio un ulteriore contenitore
-// }
+cardItem[indexCardItem].classList.add("active");
 
-// // ho creato i miei div e ora devo mettere l'active al primo div che poi al click passerà al successivo e così via
+// al click della freccia in giù va alla seconda immagine:
 
-// // visto che sono tanti e non posso farlo manualmente creerò anche qua un array -> getElemnts!
+// richiamo il bottone
+let clickDown = document.querySelector(".arrow_down");
 
-// const cardItem = document.getElementsByClassName("item");
-// console.log(cardItem);
+// aggiungo l'evento di click
+clickDown.addEventListener("click", 
+    function(){
 
-// // in questo modo seleziono il div numero 4 (quello col gatto)
-// console.log(cardItem[3]);
+        // far funzionare le frecce fino a quando ci sono gli elementi in pagina altrimenti si ferma
+        if(indexCardItem < cardItem.length - 1){ //metto il -1 perché altrimenti arrivato all'index 4 mi metterebbe la classe attiva sul 5 che non esiste
+            // tolgo la classe all'elemento che la ha in questo momento
+            cardItem[indexCardItem].classList.remove("active");
 
-// // inserisco la classe active di prova:
-// // cardItem[3].classList.add("active");
+             // aumento il valore dell'indice
+            indexCardItem++;
 
-// // non potendo cambiare i numeri a mano creo una variabili per andare ad indicare l'indice 
-// let indexCardItem = 0; //lo setto a 0 come valore iniziale
-
-// cardItem[indexCardItem].classList.add("active");
-
-// // al click della freccia in giù va alla seconda immagine:
-
-// // richiamo il bottone
-// let clickDown = document.querySelector(".arrow_down");
-
-// // aggiungo l'evento di click
-// clickDown.addEventListener("click", 
-//     function(){
-
-//         // far funzionare le frecce fino a quando ci sono gli elementi in pagina altrimenti si ferma
-//         if(indexCardItem < cardItem.length - 1){ //metto il -1 perché altrimenti arrivato all'index 4 mi metterebbe la classe attiva sul 5 che non esiste
-//             // tolgo la classe all'elemento che la ha in questo momento
-//             cardItem[indexCardItem].classList.remove("active");
-
-//              // aumento il valore dell'indice
-//             indexCardItem++;
-
-//             // metto la classe all'elemento corrispondente
-//             cardItem[indexCardItem].classList.add("active"); 
+            // metto la classe all'elemento corrispondente
+            cardItem[indexCardItem].classList.add("active"); 
         
-//         } else { //ciclo infinito del carosello 
-//             // togli l'active dall'ultima card
-//             cardItem[indexCardItem].classList.remove("active");
-//             // risetta l'indice della card a 0
-//             indexCardItem = 0;
-//             // metti attiva la card con l'indice 0
-//             cardItem[indexCardItem].classList.add("active"); 
-//         }
-//     }
-// );
+        } else { //ciclo infinito del carosello 
+            // togli l'active dall'ultima card
+            cardItem[indexCardItem].classList.remove("active");
+            // risetta l'indice della card a 0
+            indexCardItem = 0;
+            // metti attiva la card con l'indice 0
+            cardItem[indexCardItem].classList.add("active"); 
+        }
+    }
+);
 
 
-// // al click della freccia in su va all'immagine precedente:
+// al click della freccia in su va all'immagine precedente:
 
-// // richiamo il bottone
-// let clickUp = document.querySelector(".arrow_up");
+// richiamo il bottone
+let clickUp = document.querySelector(".arrow_up");
 
-// // aggiungo l'evento di click
-// clickUp.addEventListener("click", 
-//     function(){
+// aggiungo l'evento di click
+clickUp.addEventListener("click", 
+    function(){
 
-//         // far funzionare le frecce fino a quando ci sono gli elementi in pagina altrimenti si ferma
-//         if(indexCardItem > 0){ 
-//             // toglie la classe all'elemento corrispondente
-//             cardItem[indexCardItem].classList.remove("active"); 
+        // far funzionare le frecce fino a quando ci sono gli elementi in pagina altrimenti si ferma
+        if(indexCardItem > 0){ 
+            // toglie la classe all'elemento corrispondente
+            cardItem[indexCardItem].classList.remove("active"); 
 
-//             // diminuisce l'indice di uno
-//             indexCardItem--;
+            // diminuisce l'indice di uno
+            indexCardItem--;
 
-//             // aggiunge la classe all'elemento precedente
-//             cardItem[indexCardItem].classList.add("active");
+            // aggiunge la classe all'elemento precedente
+            cardItem[indexCardItem].classList.add("active");
 
-//         } else { //ciclo infinito del carosello 
-//             // togli l'active dall'ultima card
-//             cardItem[indexCardItem].classList.remove("active");
-//             // imposta l'indice della card all'ultima (ovvero la lungezza dell'array -1)
-//             indexCardItem = cardItem.length - 1;
-//             // metti attiva la card con l'indice descritto sopra
-//             cardItem[indexCardItem].classList.add("active"); 
-//         }
-//     }
-// );
+        } else { //ciclo infinito del carosello 
+            // togli l'active dall'ultima card
+            cardItem[indexCardItem].classList.remove("active");
+            // imposta l'indice della card all'ultima (ovvero la lungezza dell'array -1)
+            indexCardItem = cardItem.length - 1;
+            // metti attiva la card con l'indice descritto sopra
+            cardItem[indexCardItem].classList.add("active"); 
+        }
+    }
+);
 
