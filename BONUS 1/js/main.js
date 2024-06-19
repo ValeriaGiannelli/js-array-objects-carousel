@@ -70,10 +70,14 @@ images.forEach((element) => {
 const cardItem = document.getElementsByClassName("item");
 console.log(cardItem);
 
+// prendo tutti gli elementi del thumbnails
+const thumbnailsItem = document.getElementsByClassName("thumbnails");
+
 // non potendo cambiare i numeri a mano creo una variabili per andare ad indicare l'indice 
 let indexCardItem = 0; //lo setto a 0 come valore iniziale
 
 cardItem[indexCardItem].classList.add("active");
+thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
 
 // al click della freccia in giù va alla seconda immagine:
 
@@ -88,20 +92,24 @@ clickDown.addEventListener("click",
         if(indexCardItem < cardItem.length - 1){ //metto il -1 perché altrimenti arrivato all'index 4 mi metterebbe la classe attiva sul 5 che non esiste
             // tolgo la classe all'elemento che la ha in questo momento
             cardItem[indexCardItem].classList.remove("active");
+            thumbnailsItem[indexCardItem].classList.remove("active_thumbnails");            
 
              // aumento il valore dell'indice
             indexCardItem++;
 
             // metto la classe all'elemento corrispondente
             cardItem[indexCardItem].classList.add("active"); 
+            thumbnailsItem[indexCardItem].classList.add("active_thumbnails"); 
         
         } else { //ciclo infinito del carosello 
             // togli l'active dall'ultima card
             cardItem[indexCardItem].classList.remove("active");
+            thumbnailsItem[indexCardItem].classList.remove("active_thumbnails"); 
             // risetta l'indice della card a 0
             indexCardItem = 0;
             // metti attiva la card con l'indice 0
             cardItem[indexCardItem].classList.add("active"); 
+            thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
         }
     }
 );
@@ -120,20 +128,24 @@ clickUp.addEventListener("click",
         if(indexCardItem > 0){ 
             // toglie la classe all'elemento corrispondente
             cardItem[indexCardItem].classList.remove("active"); 
+            thumbnailsItem[indexCardItem].classList.remove("active_thumbnails"); 
 
             // diminuisce l'indice di uno
             indexCardItem--;
 
             // aggiunge la classe all'elemento precedente
             cardItem[indexCardItem].classList.add("active");
+            thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
 
         } else { //ciclo infinito del carosello 
             // togli l'active dall'ultima card
             cardItem[indexCardItem].classList.remove("active");
+            thumbnailsItem[indexCardItem].classList.remove("active_thumbnails"); 
             // imposta l'indice della card all'ultima (ovvero la lungezza dell'array -1)
             indexCardItem = cardItem.length - 1;
             // metti attiva la card con l'indice descritto sopra
             cardItem[indexCardItem].classList.add("active"); 
+            thumbnailsItem[indexCardItem].classList.add("active_thumbnails");
         }
     }
 );
