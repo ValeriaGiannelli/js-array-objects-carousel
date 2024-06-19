@@ -30,8 +30,29 @@ const images = [
     } 
 ];
 
+console.log(images);
+
 //richiamo il contenitore dove andrò ad inserire i DIV
 let containerCard = document.querySelector(".card_container");
+
+// per ogni elemento dell'array devo creare il div con le immagini e i testi che verranno presi dai singoli oggetti
+images.forEach((element) => {
+    let card = `
+                <div class="item">
+                    <!-- immagine -->
+                    <img src="${element.image}" alt="">
+
+                    <!-- titolo e descrizione -->
+                    <div class="info">
+                        <h2>${element.title}</h2>
+                        <h4>${element.text}</h4>
+                    </div>
+                    
+                </div>
+                `;
+    
+    containerCard.innerHTML += card;
+});
 
 
 // prendo i singoli elementi del mio array -> ciclo FOR
